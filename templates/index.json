@@ -1,0 +1,396 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1772733739b36ea69f": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5a5ec9b_KwzG4G": {
+          "type": "ai_gen_block_5a5ec9b",
+          "settings": {
+            "desktop_image": "shopify://shop_images/DESKTOP_7c44e294-23e8-4f94-9cd9-6286f2ccc6cc.png",
+            "mobile_image": "shopify://shop_images/MOBILE_6603e73c-8fde-4c1c-85e2-83ed28bde3ae.png",
+            "mobile_image_fit": "cover",
+            "link_url": "shopify://collections/all",
+            "link_aria_label": "View collection"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5a5ec9b_KwzG4G"
+      ],
+      "name": "Hero Section",
+      "settings": {}
+    },
+    "1772642637ad7e93ab": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_56fb1ed_W3WxiL": {
+          "type": "ai_gen_block_56fb1ed",
+          "settings": {
+            "background_image": "shopify://shop_images/aaaaaaaaaaaa.png",
+            "image_position": "center center",
+            "overlay_opacity": 0,
+            "banner_height_desktop": 300,
+            "banner_height_mobile": 200,
+            "vertical_alignment": "center",
+            "content_max_width": 800,
+            "text_max_width": 300,
+            "heading": "",
+            "heading_color": "#ffffff",
+            "heading_size": 24,
+            "text_spacing": 0,
+            "subheading": "",
+            "text_color": "#ffffff",
+            "text_size": 12,
+            "button_spacing": 0,
+            "button_text": "",
+            "button_link": "shopify://collections/all",
+            "button_background": "#fa2d2d",
+            "button_text_color": "#ffffff",
+            "button_hover_background": "#ffffff",
+            "button_hover_text_color": "#1f1f21",
+            "button_text_size": 12,
+            "button_padding_vertical": 8,
+            "button_padding_horizontal": 16,
+            "button_border_width": 0,
+            "button_border_color": "#fa2d2d",
+            "button_hover_border_color": "#ffffff",
+            "button_border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_56fb1ed_W3WxiL"
+      ],
+      "custom_css": [
+        "/* Ajusta a altura da seção para 150px */.banner {min-height: 150px !important; height: 150px !important;}",
+        " /* Garante que a imagem caiba inteira nos 150px sem cortes */.banner__media img {height: 150px !important; object-fit: contain !important; object-position: center !important; background-color: #000000; /* Mantém o fundo preto para camuflar as bordas */}"
+      ],
+      "settings": {}
+    },
+    "1772647619fabc35d2": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_2b41a93_3YCrpb": {
+          "type": "ai_gen_block_2b41a93",
+          "settings": {
+            "heading": "OFFER EXPIRING IN:",
+            "end_date": "2026-03-10",
+            "end_time": "23:59:59",
+            "days_label": "DAYS",
+            "hours_label": "HOURS",
+            "minutes_label": "MINUTES",
+            "seconds_label": "SECONDS",
+            "heading_size": 46,
+            "heading_color": "#ff0000",
+            "heading_glow_color": "#740404",
+            "number_size": 40,
+            "number_min_width": 80,
+            "number_color": "#ffffff",
+            "number_glow_color": "#707070",
+            "label_size": 16,
+            "label_color": "#e22c2c",
+            "timer_gap": 25,
+            "show_progress_bar": false,
+            "progress_width": 90,
+            "progress_height": 24,
+            "progress_radius": 12,
+            "progress_color": "#00ff00",
+            "progress_stripe_color": "#00cc00",
+            "progress_bg_color": "#1a1a1a",
+            "max_width": 1000,
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "padding_horizontal": 20,
+            "background_color": "#000000"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_03e75cd_RjCcCp": {
+          "type": "ai_gen_block_03e75cd",
+          "settings": {
+            "section_background": "#f5f5f5",
+            "section_padding_top": 40,
+            "section_padding_bottom": 40,
+            "max_width": 1200,
+            "column_gap": 15,
+            "card_background": "#ffffff",
+            "card_border_radius": 12,
+            "card_padding": 25,
+            "card_shadow_horizontal": 0,
+            "card_shadow_vertical": 4,
+            "card_shadow_blur": 15,
+            "card_shadow_opacity": 0.1,
+            "image_border_radius": 8,
+            "image_margin_bottom": 20,
+            "badge_background": "#000000",
+            "badge_text_color": "#ffffff",
+            "badge_border_radius": 50,
+            "badge_padding_vertical": 8,
+            "badge_padding_horizontal": 20,
+            "badge_font_size": 13,
+            "badge_font_weight": 600,
+            "badge_margin_bottom": 16,
+            "title_color": "#000000",
+            "title_font_size": 20,
+            "title_font_weight": 700,
+            "title_margin_bottom": 20,
+            "button_background": "#000000",
+            "button_hover_background": "#333333",
+            "button_text_color": "#ffffff",
+            "button_border_radius": 4,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 25,
+            "button_font_size": 14,
+            "button_font_weight": 700,
+            "card_1_image": "shopify://shop_images/SilverFastPass_1.png",
+            "card_1_entries": "500 Entries",
+            "card_1_multiplier": "500X",
+            "card_1_title": "BLACK",
+            "card_1_button_text": "ADD TO CART",
+            "card_1_button_link": "",
+            "card_2_image": "shopify://shop_images/PlatinumFastPass_1.png",
+            "card_2_entries": "300 Entries",
+            "card_2_multiplier": "300X",
+            "card_2_title": "PLATINUM",
+            "card_2_button_text": "ADD TO CART",
+            "card_2_button_link": "",
+            "card_3_image": "shopify://shop_images/GoldFastPass-NoShadow_1.png",
+            "card_3_entries": "150 Entries",
+            "card_3_multiplier": "150X",
+            "card_3_title": "GOLD",
+            "card_3_button_text": "ADD TO CART",
+            "card_3_button_link": "",
+            "card_4_image": "shopify://shop_images/BronzeFastPass-NoShadow_1.png",
+            "card_4_entries": "50 Entries",
+            "card_4_multiplier": "50X",
+            "card_4_title": "BRONZE",
+            "card_4_button_text": "ADD TO CART",
+            "card_4_button_link": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_2b41a93_3YCrpb",
+        "ai_gen_block_03e75cd_RjCcCp"
+      ],
+      "settings": {}
+    },
+    "1772730167551abac9": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d3828f0_QCky3h": {
+          "type": "ai_gen_block_d3828f0",
+          "settings": {
+            "max_width": 1100,
+            "desktop_width_percent": 100,
+            "padding_vertical": 60,
+            "padding_horizontal": 65,
+            "content_spacing": 20,
+            "border_radius": 20,
+            "gradient_start": "#0729c1",
+            "gradient_end": "#293b70",
+            "inner_shadow_opacity": 0.8,
+            "show_badge": true,
+            "badge_text": "LUCKIEST PRODUCT",
+            "badge_bg_color": "#ffffff",
+            "badge_text_color": "#000000",
+            "badge_icon_color": "#ffd700",
+            "badge_font_size": 14,
+            "heading": "MYSTERY CASH BOXES",
+            "heading_color": "#ffffff",
+            "heading_size": 48,
+            "subheading": "<p>Unlock amazing prizes and cash rewards with every box!</p>",
+            "subheading_color": "#e0e0e0",
+            "subheading_size": 16,
+            "button_text": "SHOP NOW",
+            "button_link": "shopify://products/limited-f7nt1™-mystery-cash-box",
+            "button_bg_color": "#ff0000",
+            "button_hover_bg_color": "#cc0000",
+            "button_text_color": "#ffffff",
+            "button_font_size": 16,
+            "button_padding_vertical": 18,
+            "button_padding_horizontal": 40,
+            "button_border_radius": 4,
+            "product_image": "shopify://shop_images/ChatGPT_Image_2_de_mar._de_2026_20_15_41_1.png",
+            "show_floating_graphics": false,
+            "graphics_color": "#ffffff",
+            "graphics_opacity": 0.8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d3828f0_QCky3h"
+      ],
+      "name": "Mystery Box",
+      "settings": {}
+    },
+    "featured_collection_EAgpN3": {
+      "type": "featured-collection",
+      "name": "New Releases",
+      "settings": {
+        "collection": "new-realeases",
+        "products_to_show": 6,
+        "title": "New Releases",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": true,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "1772734116f84edffe": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_638c082_8Y7jX7": {
+          "type": "ai_gen_block_638c082",
+          "settings": {
+            "image_1": "shopify://shop_images/freepik__um-bmw-m4-preto-igual-da-imagem-img2-fosco-com-kit__96258_1.jpg",
+            "image_2": "shopify://shop_images/ChatGPT_Image_5_de_mar._de_2026_15_14_48.png",
+            "image_3": "shopify://shop_images/freepik__um-bmw-m4-preto-igual-da-imagem-img1-fosco-com-kit__96262_1.jpg",
+            "image_gap": 16,
+            "progress_active_color": "#00ff00",
+            "progress_inactive_color": "#333333",
+            "progress_margin_top": 30,
+            "progress_margin_bottom": 30,
+            "heading": "THIS LIMITED 2026 BMW M4 COULD BE YOURS",
+            "heading_size": 36,
+            "heading_weight": "700",
+            "heading_style": "italic",
+            "heading_color": "#ffffff",
+            "heading_margin_bottom": 10,
+            "description": "250X entries with every purchase",
+            "description_size": 16,
+            "description_color": "#cccccc",
+            "description_margin_bottom": 25,
+            "content_margin_top": 0,
+            "button_text": "SHOP NOW",
+            "button_link": "",
+            "button_bg_color": "#ff0000",
+            "button_hover_bg_color": "#cc0000",
+            "button_text_color": "#ffffff",
+            "button_font_size": 16,
+            "button_font_weight": "700",
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 40,
+            "button_border_radius": 4,
+            "container_max_width": 1400,
+            "section_padding": 40
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_638c082_8Y7jX7"
+      ],
+      "name": "bmw banner",
+      "settings": {}
+    },
+    "featured_collection_RJr9Mw": {
+      "type": "featured-collection",
+      "name": "Caps",
+      "settings": {
+        "collection": "caps",
+        "products_to_show": 3,
+        "title": "Caps",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_XTigL6": {
+      "type": "featured-collection",
+      "name": "T-Shirt",
+      "settings": {
+        "collection": "roupas",
+        "products_to_show": 3,
+        "title": "T-Shirts",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": true,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "17726463535e582f51": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "1772734060e0948be6": {
+      "type": "_blocks",
+      "name": "Tshirt",
+      "settings": {}
+    }
+  },
+  "order": [
+    "1772733739b36ea69f",
+    "1772642637ad7e93ab",
+    "1772647619fabc35d2",
+    "1772730167551abac9",
+    "featured_collection_EAgpN3",
+    "1772734116f84edffe",
+    "featured_collection_RJr9Mw",
+    "featured_collection_XTigL6",
+    "17726463535e582f51",
+    "1772734060e0948be6"
+  ]
+}

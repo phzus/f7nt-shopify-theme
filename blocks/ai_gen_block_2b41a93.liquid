@@ -1,0 +1,499 @@
+{% doc %}
+  @prompt
+    I need to create a high-urgency countdown timer section identical in structure to image_c90f62.png. The section must include:
+    
+    Text: A heading on the left that says 'GIVEAWAY ENDS IN:' with a red neon glow effect.
+    
+    Timer Blocks: Four separate blocks for Days, Hours, Minutes, and Seconds with a white neon glow on the numbers and labels underneath.
+    
+    Progress Bar: A striped green animated progress bar underneath the timer that fills up 90% of the width.
+    
+    Styling: The background should be solid black. Please provide the Liquid and CSS code to make the numbers animate (tick) and the progress bar have a moving stripe effect.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-countdown-timer-{{ ai_gen_id }} {
+    display: block;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_top }}px {{ block.settings.padding_horizontal }}px {{ block.settings.padding_bottom }}px;
+    width: 100%;
+  }
+
+  .ai-countdown-timer__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .ai-countdown-timer__top-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .ai-countdown-timer__heading-{{ ai_gen_id }} {
+    margin: 0;
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px {{ block.settings.heading_glow_color }},
+                 0 0 20px {{ block.settings.heading_glow_color }},
+                 0 0 30px {{ block.settings.heading_glow_color }};
+  }
+
+  .ai-countdown-timer__blocks-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.timer_gap }}px;
+    flex-wrap: wrap;
+  }
+
+  .ai-countdown-timer__block-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-countdown-timer__number-{{ ai_gen_id }} {
+    font-size: {{ block.settings.number_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.number_color }};
+    line-height: 1;
+    text-shadow: 0 0 10px {{ block.settings.number_glow_color }},
+                 0 0 20px {{ block.settings.number_glow_color }},
+                 0 0 30px {{ block.settings.number_glow_color }},
+                 0 0 40px {{ block.settings.number_glow_color }};
+    min-width: {{ block.settings.number_min_width }}px;
+    text-align: center;
+  }
+
+  .ai-countdown-timer__label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_size }}px;
+    font-weight: 500;
+    color: {{ block.settings.label_color }};
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ai-countdown-timer__progress-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.progress_height }}px;
+    background-color: {{ block.settings.progress_bg_color }};
+    border-radius: {{ block.settings.progress_radius }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-countdown-timer__progress-bar-{{ ai_gen_id }} {
+    height: 100%;
+    width: {{ block.settings.progress_width }}%;
+    background: repeating-linear-gradient(
+      45deg,
+      {{ block.settings.progress_color }},
+      {{ block.settings.progress_color }} 10px,
+      {{ block.settings.progress_stripe_color }} 10px,
+      {{ block.settings.progress_stripe_color }} 20px
+    );
+    background-size: 200% 200%;
+    animation: ai-countdown-progress-{{ ai_gen_id }} 2s linear infinite;
+    border-radius: {{ block.settings.progress_radius }}px;
+  }
+
+  @keyframes ai-countdown-progress-{{ ai_gen_id }} {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 40px 0;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-countdown-timer__top-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .ai-countdown-timer__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-countdown-timer__number-{{ ai_gen_id }} {
+      font-size: {{ block.settings.number_size | times: 0.7 }}px;
+    }
+
+    .ai-countdown-timer__label-{{ ai_gen_id }} {
+      font-size: {{ block.settings.label_size | times: 0.8 }}px;
+    }
+
+    .ai-countdown-timer__blocks-{{ ai_gen_id }} {
+      gap: {{ block.settings.timer_gap | times: 0.6 }}px;
+    }
+  }
+{% endstyle %}
+
+<countdown-timer-{{ ai_gen_id }}
+  class="ai-countdown-timer-{{ ai_gen_id }}"
+  data-end-date="{{ block.settings.end_date }}"
+  data-end-time="{{ block.settings.end_time }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-countdown-timer__container-{{ ai_gen_id }}">
+    <div class="ai-countdown-timer__top-{{ ai_gen_id }}">
+      <h2 class="ai-countdown-timer__heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h2>
+
+      <div class="ai-countdown-timer__blocks-{{ ai_gen_id }}">
+        <div class="ai-countdown-timer__block-{{ ai_gen_id }}">
+          <div class="ai-countdown-timer__number-{{ ai_gen_id }}" data-days>00</div>
+          <div class="ai-countdown-timer__label-{{ ai_gen_id }}">{{ block.settings.days_label }}</div>
+        </div>
+
+        <div class="ai-countdown-timer__block-{{ ai_gen_id }}">
+          <div class="ai-countdown-timer__number-{{ ai_gen_id }}" data-hours>00</div>
+          <div class="ai-countdown-timer__label-{{ ai_gen_id }}">{{ block.settings.hours_label }}</div>
+        </div>
+
+        <div class="ai-countdown-timer__block-{{ ai_gen_id }}">
+          <div class="ai-countdown-timer__number-{{ ai_gen_id }}" data-minutes>00</div>
+          <div class="ai-countdown-timer__label-{{ ai_gen_id }}">{{ block.settings.minutes_label }}</div>
+        </div>
+
+        <div class="ai-countdown-timer__block-{{ ai_gen_id }}">
+          <div class="ai-countdown-timer__number-{{ ai_gen_id }}" data-seconds>00</div>
+          <div class="ai-countdown-timer__label-{{ ai_gen_id }}">{{ block.settings.seconds_label }}</div>
+        </div>
+      </div>
+    </div>
+
+    {% if block.settings.show_progress_bar %}
+      <div class="ai-countdown-timer__progress-wrapper-{{ ai_gen_id }}">
+        <div class="ai-countdown-timer__progress-bar-{{ ai_gen_id }}"></div>
+      </div>
+    {% endif %}
+  </div>
+</countdown-timer-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CountdownTimer{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.endDate = this.dataset.endDate;
+        this.endTime = this.dataset.endTime;
+        this.daysEl = this.querySelector('[data-days]');
+        this.hoursEl = this.querySelector('[data-hours]');
+        this.minutesEl = this.querySelector('[data-minutes]');
+        this.secondsEl = this.querySelector('[data-seconds]');
+      }
+
+      connectedCallback() {
+        this.updateCountdown();
+        this.interval = setInterval(() => this.updateCountdown(), 1000);
+      }
+
+      disconnectedCallback() {
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
+      }
+
+      updateCountdown() {
+        const endDateTime = new Date(this.endDate + ' ' + this.endTime).getTime();
+        const now = new Date().getTime();
+        const distance = endDateTime - now;
+
+        if (distance < 0) {
+          this.daysEl.textContent = '00';
+          this.hoursEl.textContent = '00';
+          this.minutesEl.textContent = '00';
+          this.secondsEl.textContent = '00';
+          clearInterval(this.interval);
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        this.daysEl.textContent = String(days).padStart(2, '0');
+        this.hoursEl.textContent = String(hours).padStart(2, '0');
+        this.minutesEl.textContent = String(minutes).padStart(2, '0');
+        this.secondsEl.textContent = String(seconds).padStart(2, '0');
+      }
+    }
+
+    customElements.define('countdown-timer-{{ ai_gen_id }}', CountdownTimer{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Countdown timer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Countdown settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "GIVEAWAY ENDS IN:"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End date",
+      "default": "2026-12-31",
+      "info": "Format: YYYY-MM-DD"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "End time",
+      "default": "23:59:59",
+      "info": "Format: HH:MM:SS (24-hour)"
+    },
+    {
+      "type": "header",
+      "content": "Timer labels"
+    },
+    {
+      "type": "text",
+      "id": "days_label",
+      "label": "Days label",
+      "default": "DAYS"
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "Hours label",
+      "default": "HOURS"
+    },
+    {
+      "type": "text",
+      "id": "minutes_label",
+      "label": "Minutes label",
+      "default": "MINUTES"
+    },
+    {
+      "type": "text",
+      "id": "seconds_label",
+      "label": "Seconds label",
+      "default": "SECONDS"
+    },
+    {
+      "type": "header",
+      "content": "Heading style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ff0000"
+    },
+    {
+      "type": "color",
+      "id": "heading_glow_color",
+      "label": "Heading glow color",
+      "default": "#ff0000"
+    },
+    {
+      "type": "header",
+      "content": "Timer style"
+    },
+    {
+      "type": "range",
+      "id": "number_size",
+      "label": "Number size",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "number_min_width",
+      "label": "Number min width",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "number_glow_color",
+      "label": "Number glow color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "label": "Label size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "timer_gap",
+      "label": "Gap between blocks",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Progress bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress_bar",
+      "label": "Show progress bar",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "progress_width",
+      "label": "Progress width",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "progress_height",
+      "label": "Progress height",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "progress_radius",
+      "label": "Progress border radius",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "progress_color",
+      "label": "Progress bar color",
+      "default": "#00ff00"
+    },
+    {
+      "type": "color",
+      "id": "progress_stripe_color",
+      "label": "Progress stripe color",
+      "default": "#00cc00"
+    },
+    {
+      "type": "color",
+      "id": "progress_bg_color",
+      "label": "Progress background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 1000
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Padding horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown timer"
+    }
+  ]
+}
+{% endschema %}

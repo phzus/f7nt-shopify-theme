@@ -1,0 +1,386 @@
+{% doc %}
+  @prompt
+    I need to create a 50/50 split hero section that is fully responsive and takes up 100% of the screen width with zero margins.
+    
+    Left Side: Allow for an image upload (the 'WIN THIS' graphic). A large red button with the text 'ENTER NOW' must be overlaid on the bottom center of this image.
+    
+    Right Side: Allow for a second image upload (the BMW M4 shot).
+    
+    Image Fit: Both images must use 'object-fit: cover' and have a fixed height (e.g., 600px on desktop) to ensure they align perfectly without gaps.
+    
+    Mobile: On mobile, stack the left side on top of the right side and ensure the 'overflow-x' is hidden to prevent any horizontal scrolling.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-split-hero-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .ai-split-hero-container-{{ ai_gen_id }} {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ai-split-hero-side-{{ ai_gen_id }} {
+    flex: 1;
+    position: relative;
+    height: {{ block.settings.desktop_height }}px;
+    overflow: hidden;
+  }
+
+  .ai-split-hero-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-split-hero-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-split-hero-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-split-hero-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-split-hero-button-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: {{ block.settings.button_bottom_offset }}px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: {{ block.settings.button_font_weight }};
+    text-decoration: none;
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ai-split-hero-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    transform: translateX(-50%) scale(1.05);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-split-hero-container-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-split-hero-side-{{ ai_gen_id }} {
+      height: {{ block.settings.mobile_height }}px;
+    }
+
+    .ai-split-hero-button-{{ ai_gen_id }} {
+      bottom: {{ block.settings.button_bottom_offset_mobile }}px;
+      padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
+      font-size: {{ block.settings.button_font_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<split-hero-{{ ai_gen_id }} class="ai-split-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-split-hero-container-{{ ai_gen_id }}">
+    <div class="ai-split-hero-side-{{ ai_gen_id }} ai-split-hero-left-{{ ai_gen_id }}">
+      {% if block.settings.left_image %}
+        <img
+          src="{{ block.settings.left_image | image_url: width: 2000 }}"
+          alt="{{ block.settings.left_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.left_image.width }}"
+          height="{{ block.settings.left_image.height }}"
+          class="ai-split-hero-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-split-hero-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-split-hero-empty-state-{{ ai_gen_id }}">
+            Add left image
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.button_text != blank %}
+        <a
+          href="{{ block.settings.button_link }}"
+          class="ai-split-hero-button-{{ ai_gen_id }}"
+        >
+          {{ block.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="ai-split-hero-side-{{ ai_gen_id }} ai-split-hero-right-{{ ai_gen_id }}">
+      {% if block.settings.right_image %}
+        <img
+          src="{{ block.settings.right_image | image_url: width: 2000 }}"
+          alt="{{ block.settings.right_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.right_image.width }}"
+          height="{{ block.settings.right_image.height }}"
+          class="ai-split-hero-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-split-hero-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-split-hero-empty-state-{{ ai_gen_id }}">
+            Add right image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</split-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SplitHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.preventHorizontalScroll();
+      }
+
+      preventHorizontalScroll() {
+        this.style.overflowX = 'hidden';
+      }
+    }
+
+    customElements.define('split-hero-{{ ai_gen_id }}', SplitHero{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Split hero",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left side"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left image"
+    },
+    {
+      "type": "header",
+      "content": "Right side"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right image"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "ENTER NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background color",
+      "default": "#dc0000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background color",
+      "default": "#b00000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size (desktop)",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "Font size (mobile)",
+      "min": 12,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding (desktop)",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding (desktop)",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical_mobile",
+      "label": "Vertical padding (mobile)",
+      "min": 8,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal_mobile",
+      "label": "Horizontal padding (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "button_bottom_offset",
+      "label": "Bottom offset (desktop)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_bottom_offset_mobile",
+      "label": "Bottom offset (mobile)",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop height",
+      "min": 300,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile height",
+      "min": 200,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,477 @@
+{% doc %}
+  @prompt
+    I want to create a full-width image banner section that covers 100% of the screen width with no margins or padding on the sides. The style should be identical to lgndsupplyco.com, where the banner sits flush against the edges of the browser. Please provide the Liquid and CSS code for a 'Custom Content' or 'Liquid' section that allows me to upload a background image and place text and a button on the left side, exactly like the layout in my screenshots.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-fullwidth-banner-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    height: {{ block.settings.banner_height_desktop }}px;
+    overflow: hidden;
+  }
+
+  .ai-fullwidth-banner-background-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .ai-fullwidth-banner-background-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ block.settings.image_position }};
+  }
+
+  .ai-fullwidth-banner-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #1f1f21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-fullwidth-banner-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 600px;
+    opacity: 0.3;
+  }
+
+  .ai-fullwidth-banner-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity | divided_by: 100.0 }});
+    z-index: 2;
+  }
+
+  .ai-fullwidth-banner-content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    align-items: {{ block.settings.vertical_alignment }};
+    padding: 40px;
+    max-width: {{ block.settings.content_max_width }}px;
+  }
+
+  .ai-fullwidth-banner-text-wrapper-{{ ai_gen_id }} {
+    max-width: {{ block.settings.text_max_width }}px;
+  }
+
+  .ai-fullwidth-banner-heading-{{ ai_gen_id }} {
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 {{ block.settings.text_spacing }}px 0;
+    text-align: left;
+  }
+
+  .ai-fullwidth-banner-subheading-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.5;
+    margin: 0 0 {{ block.settings.button_spacing }}px 0;
+    text-align: left;
+  }
+
+  .ai-fullwidth-banner-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .ai-fullwidth-banner-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-fullwidth-banner-{{ ai_gen_id }} {
+      height: {{ block.settings.banner_height_mobile }}px;
+    }
+
+    .ai-fullwidth-banner-content-{{ ai_gen_id }} {
+      padding: 20px;
+    }
+
+    .ai-fullwidth-banner-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.6 }}px;
+    }
+
+    .ai-fullwidth-banner-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.85 }}px;
+    }
+
+    .ai-fullwidth-banner-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.button_text_size | times: 0.9 }}px;
+      padding: {{ block.settings.button_padding_vertical | times: 0.8 }}px {{ block.settings.button_padding_horizontal | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-fullwidth-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-fullwidth-banner-background-{{ ai_gen_id }}">
+    {% if block.settings.background_image %}
+      <img
+        src="{{ block.settings.background_image | image_url: width: 2400 }}"
+        alt="{{ block.settings.background_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.background_image.width }}"
+        height="{{ block.settings.background_image.height }}"
+      >
+    {% else %}
+      <div class="ai-fullwidth-banner-placeholder-{{ ai_gen_id }}">
+        {{ 'hero-apparel-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if block.settings.overlay_opacity > 0 %}
+    <div class="ai-fullwidth-banner-overlay-{{ ai_gen_id }}"></div>
+  {% endif %}
+
+  <div class="ai-fullwidth-banner-content-{{ ai_gen_id }}">
+    <div class="ai-fullwidth-banner-text-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-fullwidth-banner-heading-{{ ai_gen_id }}">
+          {{ block.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.subheading != blank %}
+        <div class="ai-fullwidth-banner-subheading-{{ ai_gen_id }}">
+          {{ block.settings.subheading }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+        <a
+          href="{{ block.settings.button_link }}"
+          class="ai-fullwidth-banner-button-{{ ai_gen_id }}"
+        >
+          {{ block.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Full width banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "top center",
+          "label": "Top"
+        },
+        {
+          "value": "bottom center",
+          "label": "Bottom"
+        },
+        {
+          "value": "center left",
+          "label": "Left"
+        },
+        {
+          "value": "center right",
+          "label": "Right"
+        }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_desktop",
+      "min": 300,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "label": "Desktop height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "min": 200,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "label": "Mobile height",
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Content container width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Text max width",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Full Width Banner"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "text_spacing",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Spacing below heading",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Add your promotional text here</p>"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Text size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Spacing below text",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#fa2d2d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 16,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border color",
+      "default": "#fa2d2d"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full width banner"
+    }
+  ]
+}
+{% endschema %}
