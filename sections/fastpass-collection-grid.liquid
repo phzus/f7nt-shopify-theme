@@ -34,11 +34,20 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
+  }
+
+  .fastpass-card__link-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
   }
 
   .fastpass-card__image-wrapper {
     width: 100%;
-    margin-bottom: 16px;
   }
 
   .fastpass-card__image {
@@ -63,6 +72,7 @@
     overflow: hidden;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    line-height: normal;
   }
 
   .fastpass-card__badge--black {
@@ -139,6 +149,8 @@
     transition: background-color 0.25s ease, transform 0.15s ease;
     letter-spacing: 1px;
     margin-top: auto;
+    position: relative;
+    z-index: 2;
   }
 
   .fastpass-card__atc:hover {
@@ -215,6 +227,8 @@
         -%}
 
         <div class="fastpass-card">
+          <a href="{{ product.url }}" class="fastpass-card__link-overlay" aria-label="{{ product.title | escape }}"></a>
+
           <div class="fastpass-card__image-wrapper">
             {%- if product.featured_image -%}
               <img
