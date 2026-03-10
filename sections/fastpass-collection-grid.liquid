@@ -1,0 +1,365 @@
+{% comment %}
+  Dynamic Fastpass Collection Grid
+  Pulls products from a selected collection and renders them
+  with color-coded entry badges and shimmer flash animation.
+{% endcomment %}
+
+{%- assign fp_collection = collections[section.settings.collection] -%}
+
+{% style %}
+  .fastpass-grid-section {
+    display: block;
+    width: 100%;
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+  }
+
+  .fastpass-grid-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .fastpass-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: {{ section.settings.gap }}px;
+  }
+
+  .fastpass-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .fastpass-card__image-wrapper {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .fastpass-card__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  /* ── Entries badge ── */
+  .fastpass-card__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .fastpass-card__badge--black {
+    background: linear-gradient(135deg, #c0392b 0%, #1a1a1a 50%, #c0392b 100%);
+  }
+  .fastpass-card__badge--platinum {
+    background: linear-gradient(135deg, #2980b9 0%, #bdc3c7 50%, #2980b9 100%);
+  }
+  .fastpass-card__badge--gold {
+    background: linear-gradient(135deg, #d4a017 0%, #f7dc6f 50%, #d4a017 100%);
+    color: #1a1a1a;
+  }
+  .fastpass-card__badge--bronze {
+    background: linear-gradient(135deg, #b87333 0%, #e8a96a 50%, #b87333 100%);
+  }
+
+  .fastpass-card__badge-multiplier {
+    background: rgba(255,255,255,0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .fastpass-card__badge--gold .fastpass-card__badge-multiplier {
+    background: rgba(0,0,0,0.15);
+  }
+
+  /* ── Shimmer flash animation ── */
+  .fastpass-card__badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,0.4) 50%,
+      transparent 100%
+    );
+    animation: fastpass-shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes fastpass-shimmer {
+    0% { left: -100%; }
+    50% { left: 120%; }
+    100% { left: 120%; }
+  }
+
+  /* ── Title ── */
+  .fastpass-card__title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #000000;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* ── Add to Cart button ── */
+  .fastpass-card__atc {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.15s ease;
+    letter-spacing: 1px;
+    margin-top: auto;
+  }
+
+  .fastpass-card__atc:hover {
+    background-color: #333333;
+  }
+
+  .fastpass-card__atc:active {
+    transform: scale(0.97);
+  }
+
+  .fastpass-card__atc--added {
+    background-color: #27ae60 !important;
+    pointer-events: none;
+  }
+
+  /* ── Responsive ── */
+  @media screen and (max-width: 989px) {
+    .fastpass-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .fastpass-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .fastpass-card {
+      padding: 14px;
+    }
+
+    .fastpass-card__title {
+      font-size: 16px;
+    }
+
+    .fastpass-card__badge {
+      font-size: 11px;
+      padding: 6px 12px;
+    }
+  }
+{% endstyle %}
+
+<div class="fastpass-grid-section" {{ section.shopify_attributes }}>
+  <div class="fastpass-grid-container">
+    <div class="fastpass-grid">
+      {%- for product in fp_collection.products limit: 4 -%}
+        {%- liquid
+          # Determine the tier from the product title
+          assign tier_name = product.title | downcase
+          assign tier_slug = 'black'
+
+          if tier_name contains 'black'
+            assign tier_slug = 'black'
+            assign display_name = 'BLACK'
+          elsif tier_name contains 'platin'
+            assign tier_slug = 'platinum'
+            assign display_name = 'PLATINUM'
+          elsif tier_name contains 'gold'
+            assign tier_slug = 'gold'
+            assign display_name = 'GOLD'
+          elsif tier_name contains 'bronze'
+            assign tier_slug = 'bronze'
+            assign display_name = 'BRONZE'
+          else
+            assign display_name = product.title | upcase
+          endif
+
+          # Try to get entries/multiplier from metafields, fallback to variant metafields or tags
+          assign entries_text = product.metafields.custom.entries | default: ''
+          assign multiplier_text = product.metafields.custom.multiplier | default: ''
+
+          assign first_variant = product.selected_or_first_available_variant
+        -%}
+
+        <div class="fastpass-card">
+          <div class="fastpass-card__image-wrapper">
+            {%- if product.featured_image -%}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                loading="lazy"
+                width="{{ product.featured_image.width }}"
+                height="{{ product.featured_image.height }}"
+                class="fastpass-card__image"
+              >
+            {%- else -%}
+              <div style="width:100%;aspect-ratio:1/1;background:#f0f0f0;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if entries_text != blank or multiplier_text != blank -%}
+            <div class="fastpass-card__badge fastpass-card__badge--{{ tier_slug }}">
+              {%- if entries_text != blank -%}{{ entries_text }}{%- endif -%}
+              {%- if multiplier_text != blank -%}
+                <span class="fastpass-card__badge-multiplier">{{ multiplier_text }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <h3 class="fastpass-card__title">{{ display_name }}</h3>
+
+          <button
+            type="button"
+            class="fastpass-card__atc"
+            data-variant-id="{{ first_variant.id }}"
+            {%- unless first_variant.available %} disabled{% endunless %}
+          >
+            {%- if first_variant.available -%}
+              ADD TO CART
+            {%- else -%}
+              SOLD OUT
+            {%- endif -%}
+          </button>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const buttons = document.querySelectorAll('.fastpass-card__atc[data-variant-id]');
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const variantId = btn.getAttribute('data-variant-id');
+        if (!variantId || btn.disabled) return;
+
+        btn.textContent = 'ADDING...';
+        btn.disabled = true;
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: parseInt(variantId), quantity: 1 })
+        })
+        .then(function(res) { return res.json(); })
+        .then(function() {
+          btn.textContent = '✓ ADDED';
+          btn.classList.add('fastpass-card__atc--added');
+          setTimeout(function() {
+            btn.textContent = 'ADD TO CART';
+            btn.classList.remove('fastpass-card__atc--added');
+            btn.disabled = false;
+          }, 2000);
+        })
+        .catch(function() {
+          btn.textContent = 'ERROR';
+          setTimeout(function() {
+            btn.textContent = 'ADD TO CART';
+            btn.disabled = false;
+          }, 2000);
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Fastpass Grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Max width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Column gap",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fastpass Grid"
+    }
+  ]
+}
+{% endschema %}
