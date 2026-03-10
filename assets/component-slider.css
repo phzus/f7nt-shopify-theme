@@ -319,19 +319,19 @@ slider-component.slider-component-full-width {
 
 @media screen and (min-width: 990px) {
   .slider:not(.slider--everywhere):not(.slider--desktop) + .slider-buttons {
-    display: none;
+    display: flex;
   }
 }
 
 @media screen and (max-width: 989px) {
   .slider--desktop:not(.slider--tablet) + .slider-buttons {
-    display: none;
+    display: flex;
   }
 }
 
 @media screen and (min-width: 750px) {
   .slider--mobile + .slider-buttons {
-    display: none;
+    display: flex;
   }
 }
 

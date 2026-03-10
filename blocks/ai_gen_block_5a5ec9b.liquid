@@ -1,13 +1,13 @@
 {% doc %}
   @prompt
     I need a custom Shopify section for a 'Responsive Clickable Hero'.
-    
+
     Image Uploads: It must have two separate settings: one for the Desktop Image (DESKTOP.png) and one for the Mobile Image (MOBILE.png).
-    
+
     Behavior: I do not want any buttons or text overlays from the theme. The entire section must be a clickable link (a single <a> tag wrapping the images) that leads to my collection.
-    
+
     Responsiveness: Use a media query to show the Desktop image on screens wider than 767px and the Mobile image on screens 767px and below.
-    
+
     Styling: The images must be full-width (100%), with zero margins or padding in the section. On mobile, ensure the image doesn't look squished by using object-fit: contain or cover based on the aspect ratio of MOBILE.png.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
@@ -74,6 +74,10 @@
   }
 
   @media screen and (max-width: 767px) {
+    .ai-clickable-hero-{{ ai_gen_id }} {
+      margin-top: 10px;
+    }
+
     .ai-clickable-hero-desktop-{{ ai_gen_id }} {
       display: none;
     }

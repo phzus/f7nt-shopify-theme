@@ -1,13 +1,13 @@
 {% doc %}
   @prompt
     I need to create a high-urgency countdown timer section identical in structure to image_c90f62.png. The section must include:
-    
+
     Text: A heading on the left that says 'GIVEAWAY ENDS IN:' with a red neon glow effect.
-    
+
     Timer Blocks: Four separate blocks for Days, Hours, Minutes, and Seconds with a white neon glow on the numbers and labels underneath.
-    
+
     Progress Bar: A striped green animated progress bar underneath the timer that fills up 90% of the width.
-    
+
     Styling: The background should be solid black. Please provide the Liquid and CSS code to make the numbers animate (tick) and the progress bar have a moving stripe effect.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
@@ -116,26 +116,33 @@
   }
 
   @media screen and (max-width: 749px) {
+    .ai-countdown-timer__container-{{ ai_gen_id }} {
+      gap: 15px;
+    }
+
     .ai-countdown-timer__top-{{ ai_gen_id }} {
       flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
+      align-items: center; /* Centered instead of flex-start */
+      gap: 15px; /* Reduced gap */
     }
 
     .ai-countdown-timer__heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+      font-size: {{ block.settings.heading_size | times: 0.55 }}px; /* Reduced further to fit one line */
+      text-align: center;
     }
 
     .ai-countdown-timer__number-{{ ai_gen_id }} {
-      font-size: {{ block.settings.number_size | times: 0.7 }}px;
+      font-size: 26px;
+      min-width: 45px;
     }
 
     .ai-countdown-timer__label-{{ ai_gen_id }} {
-      font-size: {{ block.settings.label_size | times: 0.8 }}px;
+      font-size: 12px;
     }
 
     .ai-countdown-timer__blocks-{{ ai_gen_id }} {
-      gap: {{ block.settings.timer_gap | times: 0.6 }}px;
+      gap: 15px; /* Force slightly larger gap */
+      justify-content: center;
     }
   }
 {% endstyle %}
