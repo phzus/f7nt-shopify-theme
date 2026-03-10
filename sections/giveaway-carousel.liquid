@@ -1,0 +1,326 @@
+{% style %}
+  .giveaway-carousel-section {
+    position: relative;
+    width: 100%;
+    /* Always apply hardcoded background image */
+    background-image: url('{{ "bg-giveaway-cta-sec.png" | asset_url }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .giveaway-carousel-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+    margin-top: 40px;
+  }
+
+  .giveaway-carousel-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 900;
+    font-style: italic;
+    color: #ffffff;
+    margin: 0 0 15px;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .giveaway-carousel-subheading {
+    font-size: 16px;
+    color: #ffffff;
+    margin: 0 auto 30px;
+    max-width: 800px;
+    line-height: 1.5;
+  }
+
+  .giveaway-carousel-button {
+    display: inline-block;
+    background-color: #e52828;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .giveaway-carousel-button:hover {
+    background-color: #c41e1e;
+    transform: translateY(-2px);
+  }
+
+  /* Swiper styles custom overrides */
+  .giveaway-carousel .swiper {
+    width: 100%;
+    padding-bottom: 40px; /* Space for pagination */
+  }
+
+  .giveaway-carousel .swiper-slide {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .giveaway-carousel .swiper-slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  /* Pagination matches the design */
+  .giveaway-carousel .swiper-pagination-bullet {
+    width: 40px;
+    height: 4px;
+    background-color: #ffffff;
+    opacity: 0.3;
+    border-radius: 2px;
+    transition: opacity 0.3s;
+  }
+
+  .giveaway-carousel .swiper-pagination-bullet-active {
+    opacity: 1;
+    background-color: #e52828;
+  }
+
+  /* Arrows override */
+  .giveaway-carousel .swiper-button-next,
+  .giveaway-carousel .swiper-button-prev {
+    color: #ffffff;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .giveaway-carousel .swiper-button-next:hover,
+  .giveaway-carousel .swiper-button-prev:hover {
+    opacity: 1;
+  }
+
+  @media screen and (max-width: 749px) {
+    .giveaway-carousel-section {
+      padding-top: {{ section.settings.padding_top | times: 0.5 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.5 }}px;
+    }
+
+    .giveaway-carousel-heading {
+      font-size: {{ section.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .giveaway-carousel .swiper-slide img {
+      height: 300px;
+      /* On mobile centered mode, add slight scale to the active slide for cool effect (optional) */
+      transition: transform 0.3s;
+      transform: scale(0.95);
+    }
+
+    .giveaway-carousel .swiper-slide-active img {
+      transform: scale(1);
+    }
+
+    /* Hide arrows on mobile as requested */
+    .giveaway-carousel .swiper-button-next,
+    .giveaway-carousel .swiper-button-prev {
+      display: none !important;
+    }
+  }
+
+  /* Desktop constraint for Swiper to avoid stretching beyond page width if desired,
+     but usually we want edge-to-edge. We will constrain the swiper container slightly
+     on desktop to align with the max width */
+  @media screen and (min-width: 750px) {
+    .giveaway-carousel {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+{% endstyle %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<div class="giveaway-carousel-section" {{ section.shopify_attributes }}>
+  <div class="giveaway-carousel">
+    <div class="swiper mySwiper-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'image' -%}
+            <div class="swiper-slide" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {%- else -%}
+                <div style="width:100%;height:400px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;border-radius:4px;">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- Arrows (Desktop Only) -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <div class="giveaway-carousel-content">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="giveaway-carousel-heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <div class="giveaway-carousel-subheading">{{ section.settings.subheading }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <a href="{{ section.settings.button_link | default: '#' }}" class="giveaway-carousel-button">
+        {{ section.settings.button_text }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiper = new Swiper('.mySwiper-{{ section.id }}', {
+      loop: true,
+      spaceBetween: 16,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        // Mobile layout: Edge to edge, 1.6 visible, centered
+        320: {
+          slidesPerView: 1.6,
+          centeredSlides: true,
+          spaceBetween: 12
+        },
+        // Desktop layout: 3 visible, not centered
+        750: {
+          slidesPerView: 3,
+          centeredSlides: false,
+          spaceBetween: 20
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Giveaway Carousel",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image",
+      "info": "Upload the red gradient background image (e.g. bg-giveaway-cta-sec.png)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "THIS MURDERED OUT 682HP ESCALADE-V COULD BE YOURS"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading text size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Description",
+      "default": "<p>This fully blacked-out Cadillac Escalade-V packs a supercharged 682HP V8, insane luxury, and the unmistakable presence of Cadillac's most powerful SUV ever built... and it could be YOURS. <strong>But hurry, you only have 8 DAYS to make it YOURS!</strong></p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "ALL THE DETAILS"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "carousel_image",
+      "name": "Carousel Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Giveaway Carousel",
+      "blocks": [
+        { "type": "carousel_image" },
+        { "type": "carousel_image" },
+        { "type": "carousel_image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

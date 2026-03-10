@@ -34,11 +34,27 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .fastpass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  }
+
+  .fastpass-card__title-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
   }
 
   .fastpass-card__image-wrapper {
     width: 100%;
-    margin-bottom: 16px;
   }
 
   .fastpass-card__image {
@@ -63,6 +79,7 @@
     overflow: hidden;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    line-height: normal;
   }
 
   .fastpass-card__badge--black {
@@ -124,6 +141,21 @@
     letter-spacing: 1.5px;
   }
 
+  .fastpass-card__title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .fastpass-card__title a::after {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+
   /* ── Add to Cart button ── */
   .fastpass-card__atc {
     width: 100%;
@@ -139,6 +171,8 @@
     transition: background-color 0.25s ease, transform 0.15s ease;
     letter-spacing: 1px;
     margin-top: auto;
+    position: relative;
+    z-index: 2;
   }
 
   .fastpass-card__atc:hover {
@@ -241,7 +275,11 @@
             </div>
           {%- endif -%}
 
-          <h3 class="fastpass-card__title">{{ display_name }}</h3>
+          <h3 class="fastpass-card__title">
+            <a href="{{ product.url }}" class="fastpass-card__title-link full-unstyled-link" aria-label="{{ product.title | escape }}">
+              {{ display_name }}
+            </a>
+          </h3>
 
           <button
             type="button"
@@ -313,7 +351,7 @@
       "type": "color",
       "id": "bg_color",
       "label": "Background color",
-      "default": "#f5f5f5"
+      "default": "#ffffff"
     },
     {
       "type": "range",

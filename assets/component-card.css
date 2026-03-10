@@ -136,7 +136,7 @@
 
 .card__information {
   grid-row-start: 2;
-  padding: 1.3rem 1rem;
+  padding: 0 1rem 1.3rem;
 }
 
 .card:not(.ratio) > .card__content {
@@ -266,7 +266,7 @@
 @media screen and (min-width: 750px) {
   .card__information {
     padding-bottom: 1.7rem;
-    padding-top: 1.7rem;
+    padding-top: 0;
   }
 }
 
@@ -420,7 +420,8 @@
 }
 
 .card--standard > .card__content {
-  padding: 0;
+  padding: 2.4rem;
+  background-color: #ffffff;
 }
 
 .card--standard > .card__content .card__information {
@@ -504,6 +505,28 @@
 
 .card-article-info {
   margin-top: 1rem;
+}
+
+@keyframes f7nt-sweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  20%, 100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+.f7nt-flash-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: skewX(-20deg) translateX(-150%);
+  animation: f7nt-sweep 3.5s infinite;
+  pointer-events: none;
 }
 
 /* Card Shapes */

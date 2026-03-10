@@ -9,8 +9,8 @@
     "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 52,
-    "spacing_grid_horizontal": 40,
-    "spacing_grid_vertical": 40,
+    "spacing_grid_horizontal": 16,
+    "spacing_grid_vertical": 16,
     "animations_reveal_on_scroll": true,
     "animations_hover_elements": "none",
     "buttons_border_thickness": 1,
@@ -137,21 +137,21 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#000000",
+          "background": "#f2f2f2",
           "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#fa2d2d",
-          "button_label": "#1f1f21",
-          "secondary_button_label": "#fc3737",
-          "shadow": "#ffffff"
+          "text": "#1a1a1a",
+          "button": "#000000",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#000000",
+          "shadow": "#000000"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#1f1f21",
+          "background": "#000000",
           "background_gradient": "",
           "text": "#ffffff",
-          "button": "#ffffff",
+          "button": "#fa2d2d",
           "button_label": "#1f1f21",
           "secondary_button_label": "#ffffff",
           "shadow": "#ffffff"
@@ -198,7 +198,7 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#1f1f21",
+            "background": "#f2f2f2",
             "background_gradient": "",
             "text": "#ffffff",
             "button": "#e3fc02",
@@ -209,13 +209,13 @@
         },
         "scheme-2": {
           "settings": {
-            "background": "#1f1f21",
+            "background": "#ffffff",
             "background_gradient": "",
-            "text": "#ffffff",
-            "button": "#ffffff",
-            "button_label": "#1f1f21",
-            "secondary_button_label": "#ffffff",
-            "shadow": "#ffffff"
+            "text": "#1a1a1a",
+            "button": "#000000",
+            "button_label": "#ffffff",
+            "secondary_button_label": "#000000",
+            "shadow": "#000000"
           }
         },
         "scheme-3": {
@@ -258,8 +258,8 @@
       "body_scale": 100,
       "page_width": 1600,
       "spacing_sections": 52,
-      "spacing_grid_horizontal": 40,
-      "spacing_grid_vertical": 40,
+      "spacing_grid_horizontal": 16,
+      "spacing_grid_vertical": 16,
       "animations_reveal_on_scroll": true,
       "animations_hover_elements": "none",
       "buttons_border_thickness": 1,
