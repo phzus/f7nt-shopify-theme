@@ -1,6 +1,14 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 
+<style>
+  @media screen and (min-width: 750px) {
+    .announcement-bar__message {
+      font-size: 16px !important;
+    }
+  }
+</style>
+
 {%- liquid
   assign social_icons = true
   if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
@@ -186,13 +194,13 @@
       "unit": "s",
       "label": "t:sections.announcement-bar.settings.change_slides_speed.label",
       "default": 5
-    },    
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-4"
-    },  
+    },
     {
       "type": "checkbox",
       "id": "show_line_separator",
@@ -206,7 +214,7 @@
     {
       "type": "paragraph",
          "content": "t:sections.announcement-bar.settings.paragraph.content"
-    },             
+    },
     {
       "type": "checkbox",
       "id": "show_social",

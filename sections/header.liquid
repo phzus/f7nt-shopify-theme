@@ -72,6 +72,7 @@
     .list-menu__item--link {
       padding-bottom: 0.5rem;
       padding-top: 0.5rem;
+      font-size: 16px;
     }
   }
 </style>
@@ -172,7 +173,7 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="{{ settings.logo_width }}" loading="eager" class="header__heading-logo">
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -215,7 +216,7 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="{{ settings.logo_width }}" loading="eager" class="header__heading-logo">
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}

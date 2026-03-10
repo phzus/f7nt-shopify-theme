@@ -31,52 +31,14 @@
       "settings": {}
     },
     "1772642637ad7e93ab": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_56fb1ed_W3WxiL": {
-          "type": "ai_gen_block_56fb1ed",
-          "settings": {
-            "background_image": "shopify://shop_images/aaaaaaaaaaaa.png",
-            "image_position": "center center",
-            "overlay_opacity": 0,
-            "banner_height_desktop": 300,
-            "banner_height_mobile": 200,
-            "vertical_alignment": "center",
-            "content_max_width": 800,
-            "text_max_width": 300,
-            "heading": "",
-            "heading_color": "#ffffff",
-            "heading_size": 24,
-            "text_spacing": 0,
-            "subheading": "",
-            "text_color": "#ffffff",
-            "text_size": 12,
-            "button_spacing": 0,
-            "button_text": "",
-            "button_link": "shopify://collections/all",
-            "button_background": "#fa2d2d",
-            "button_text_color": "#ffffff",
-            "button_hover_background": "#ffffff",
-            "button_hover_text_color": "#1f1f21",
-            "button_text_size": 12,
-            "button_padding_vertical": 8,
-            "button_padding_horizontal": 16,
-            "button_border_width": 0,
-            "button_border_color": "#fa2d2d",
-            "button_hover_border_color": "#ffffff",
-            "button_border_radius": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_56fb1ed_W3WxiL"
-      ],
-      "custom_css": [
-        "/* Ajusta a altura da seção para 150px */.banner {min-height: 150px !important; height: 150px !important;}",
-        " /* Garante que a imagem caiba inteira nos 150px sem cortes */.banner__media img {height: 150px !important; object-fit: contain !important; object-position: center !important; background-color: #000000; /* Mantém o fundo preto para camuflar as bordas */}"
-      ],
-      "settings": {}
+      "type": "image-banner-simple",
+      "settings": {
+        "desktop_asset": "banner-2-desk.png",
+        "mobile_asset": "banner-2-mob.png",
+        "lazy_load": "eager",
+        "link_url": "",
+        "link_aria_label": "Award banner"
+      }
     },
     "1772647619fabc35d2": {
       "type": "_blocks",
