@@ -75,7 +75,8 @@
 
   @media screen and (max-width: 767px) {
     .ai-clickable-hero-{{ ai_gen_id }} {
-      margin-top: 10px;
+      /* Force zero margin to connect with header */
+      margin-top: 0px;
     }
 
     .ai-clickable-hero-desktop-{{ ai_gen_id }} {
@@ -102,7 +103,14 @@
     aria-label="{{ block.settings.link_aria_label }}"
   >
     <div class="ai-clickable-hero-desktop-{{ ai_gen_id }}">
-      {% if block.settings.desktop_image %}
+      {% if block.settings.desktop_asset != blank %}
+        <img
+          src="{{ block.settings.desktop_asset | asset_url }}"
+          alt="{{ block.settings.link_aria_label | escape }}"
+          loading="lazy"
+          class="ai-clickable-hero-image-{{ ai_gen_id }}"
+        >
+      {% elsif block.settings.desktop_image %}
         <img
           src="{{ block.settings.desktop_image | image_url: width: 2000 }}"
           alt="{{ block.settings.desktop_image.alt | escape }}"
@@ -122,7 +130,14 @@
     </div>
 
     <div class="ai-clickable-hero-mobile-{{ ai_gen_id }}">
-      {% if block.settings.mobile_image %}
+      {% if block.settings.mobile_asset != blank %}
+        <img
+          src="{{ block.settings.mobile_asset | asset_url }}"
+          alt="{{ block.settings.link_aria_label | escape }}"
+          loading="lazy"
+          class="ai-clickable-hero-image-{{ ai_gen_id }}"
+        >
+      {% elsif block.settings.mobile_image %}
         <img
           src="{{ block.settings.mobile_image | image_url: width: 1000 }}"
           alt="{{ block.settings.mobile_image.alt | escape }}"
@@ -173,6 +188,22 @@
       "type": "image_picker",
       "id": "mobile_image",
       "label": "Mobile image"
+    },
+    {
+      "type": "header",
+      "content": "Images (Theme assets fallback)"
+    },
+    {
+      "type": "text",
+      "id": "desktop_asset",
+      "label": "Desktop asset filename",
+      "info": "e.g. hero-desktop.png"
+    },
+    {
+      "type": "text",
+      "id": "mobile_asset",
+      "label": "Mobile asset filename",
+      "info": "e.g. hero-mobile.png"
     },
     {
       "type": "select",

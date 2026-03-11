@@ -7,7 +7,7 @@
           "type": "ai_gen_block_5a5ec9b",
           "settings": {
             "desktop_image": "shopify://shop_images/DESKTOP_7c44e294-23e8-4f94-9cd9-6286f2ccc6cc.png",
-            "mobile_image": "shopify://shop_images/MOBILE_6603e73c-8fde-4c1c-85e2-83ed28bde3ae.png",
+            "mobile_asset": "HERO-MOBILE.png",
             "mobile_image_fit": "cover",
             "link_url": "shopify://collections/all",
             "link_aria_label": "View collection"
