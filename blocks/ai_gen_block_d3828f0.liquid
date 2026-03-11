@@ -39,9 +39,16 @@
   }
 
   @media screen and (max-width: 749px) {
+    .ai-mystery-banner-{{ ai_gen_id }} {
+      padding: 0;
+    }
     .ai-mystery-banner__container-{{ ai_gen_id }} {
       padding: 30px 28px;
       grid-template-columns: 1fr;
+    }
+    .ai-mystery-banner__image-wrapper-{{ ai_gen_id }} {
+      transform: scale(1.15);
+      margin-top: 10px;
     }
   }
 

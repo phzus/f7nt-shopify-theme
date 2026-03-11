@@ -617,3 +617,28 @@
     clip-path: polygon(var(--shape--blob-5));
   }
 }
+
+/* F7NT Custom Overrides */
+
+/* Increase product card border radius on mobile and desktop */
+.card--card,
+.card--standard .card__inner,
+.card--card:after,
+.card--standard .card__inner:after {
+  border-radius: calc(var(--border-radius) + 6px) !important;
+}
+
+/* Decrease card inner padding specifically on mobile devices */
+@media screen and (max-width: 749px) {
+  .card__content {
+    padding: 10px !important;
+  }
+}
+
+/* Style the FastPass Add to Cart buttons according to brief */
+.quick-add__submit.button {
+  font-size: 12px !important;
+  padding-top: 1.8em !important;
+  padding-bottom: 1.8em !important;
+  min-height: auto !important;
+}

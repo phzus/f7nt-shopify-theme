@@ -86,17 +86,19 @@
     font-size: 24px;
     font-weight: 300;
     line-height: 1;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #000;
   }
 
   .f7nt-faq-item.is-active .f7nt-faq-icon {
     transform: rotate(45deg);
+    color: #113320; /* Dark green for active state */
   }
 
   .f7nt-faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s ease-in-out, padding 0.35s ease-in-out;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
     padding: 0 32px;
     color: #4b5563;
     line-height: 1.6;
