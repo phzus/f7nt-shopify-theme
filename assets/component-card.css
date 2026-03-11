@@ -525,7 +525,8 @@
   height: 100%;
   background: rgba(255, 255, 255, 0.4);
   transform: skewX(-20deg) translateX(-150%);
-  animation: f7nt-sweep 3.5s infinite;
+  animation: f7nt-sweep 1.5s infinite;
+  filter: blur(6px);
   pointer-events: none;
 }
 

@@ -11,7 +11,13 @@
     display: block;
     width: 100%;
     background-color: {{ section.settings.bg_color }};
-    padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+    padding: 32px 16px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .fastpass-grid-section {
+      padding: 56px 16px;
+    }
   }
 
   .fastpass-grid-container {
@@ -83,17 +89,17 @@
   }
 
   .fastpass-card__badge--black {
-    background: linear-gradient(135deg, #c0392b 0%, #1a1a1a 50%, #c0392b 100%);
+    background: radial-gradient(circle, #df2b19 0%, #6b1006 100%);
   }
   .fastpass-card__badge--platinum {
-    background: linear-gradient(135deg, #2980b9 0%, #bdc3c7 50%, #2980b9 100%);
+    background: radial-gradient(circle, #3498db 0%, #123e5c 100%);
   }
   .fastpass-card__badge--gold {
-    background: linear-gradient(135deg, #d4a017 0%, #f7dc6f 50%, #d4a017 100%);
+    background: radial-gradient(circle, #f7dc6f 0%, #b38500 100%);
     color: #1a1a1a;
   }
   .fastpass-card__badge--bronze {
-    background: linear-gradient(135deg, #b87333 0%, #e8a96a 50%, #b87333 100%);
+    background: radial-gradient(circle, #e8a96a 0%, #8f4d15 100%);
   }
 
   .fastpass-card__badge-multiplier {
@@ -268,7 +274,7 @@
 
           {%- if entries_text != blank or multiplier_text != blank -%}
             <div class="fastpass-card__badge fastpass-card__badge--{{ tier_slug }}">
-              {%- if entries_text != blank -%}{{ entries_text }}{%- endif -%}
+              {%- if entries_text != blank -%}{{ entries_text }} entries{%- endif -%}
               {%- if multiplier_text != blank -%}
                 <span class="fastpass-card__badge-multiplier">{{ multiplier_text }}</span>
               {%- endif -%}

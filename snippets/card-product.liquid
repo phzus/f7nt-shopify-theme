@@ -227,11 +227,11 @@
                   {%- if entries_text != blank -%}
                     {%- assign entries_value = entries_text | times: 1 -%}
                     {%- if entries_value >= 10000 -%}
-                      {%- assign bg_color = '#ae0303' -%}
+                      {%- assign radial_bg = 'radial-gradient(circle, #df2b19 0%, #6b1006 100%)' -%}
                     {%- else -%}
-                      {%- assign bg_color = '#937549' -%}
+                      {%- assign radial_bg = 'radial-gradient(circle, #e8a96a 0%, #8f4d15 100%)' -%}
                     {%- endif -%}
-                    <span class="f7nt-flash-sweep" style="position: relative; overflow: hidden; background-color: {{ bg_color }}; color: white; padding: 4px 8px; border-radius: 40px; font-weight: bold; font-size: 12px; display: inline-block; white-space: nowrap;">
+                    <span class="f7nt-flash-sweep" style="position: relative; overflow: hidden; background: {{ radial_bg }}; color: white; padding: 8px 18px; border-radius: 40px; font-weight: bold; font-size: 12px; display: inline-block; white-space: nowrap;">
                       {{ entries_text }} entries
                     </span>
                   {%- endif -%}

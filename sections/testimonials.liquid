@@ -1,0 +1,301 @@
+{% style %}
+  .f7nt-testimonials-wrapper {
+    background-color: transparent;
+    padding: {{ section.settings.padding_top }}px 16px {{ section.settings.padding_bottom }}px;
+  }
+  .f7nt-testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .f7nt-testimonials-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  @media (min-width: 768px) {
+    .f7nt-testimonials-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .f7nt-testimonials-grid {
+      grid-template-columns: repeat({{ section.settings.desktop_columns }}, minmax(0, 1fr));
+    }
+  }
+  .f7nt-testimonial-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    padding: 24px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  @media (min-width: 768px) {
+    .f7nt-testimonial-card {
+      padding: 32px;
+    }
+  }
+  .f7nt-testimonial-card:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+  .f7nt-testimonial-quote-icon {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    font-size: 60px;
+    line-height: 1;
+    font-family: serif;
+    color: rgba(0,0,0,0.05);
+  }
+  .f7nt-testimonial-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+  }
+  .f7nt-testimonial-stars {
+    display: flex;
+    gap: 4px;
+  }
+  .f7nt-testimonial-star {
+    width: 16px;
+    height: 16px;
+  }
+  .f7nt-testimonial-star.filled {
+    fill: #facc15;
+    color: #facc15;
+  }
+  .f7nt-testimonial-star.empty {
+    fill: #e5e7eb;
+    color: #e5e7eb;
+  }
+  .f7nt-testimonial-text {
+    font-size: 16px;
+    color: #374151;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .f7nt-testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .f7nt-testimonial-avatar {
+    position: relative;
+    display: flex;
+    height: 48px;
+    width: 48px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #f3f4f6;
+    align-items: center;
+    justify-content: center;
+  }
+  .f7nt-testimonial-avatar img {
+    aspect-ratio: 1/1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .f7nt-testimonial-fallback {
+    font-weight: 600;
+    color: #9ca3af;
+  }
+  .f7nt-author-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .f7nt-author-name {
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    font-size: 16px;
+  }
+  .f7nt-author-role {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+  }
+{% endstyle %}
+
+<div class="f7nt-testimonials-wrapper" {{ section.shopify_attributes }}>
+  <div class="f7nt-testimonials-container">
+    {% if section.settings.heading != blank %}
+      <div style="margin-bottom: 40px;">
+        <h2 style="margin: 0; font-weight: 900; text-transform: uppercase; font-size: 40px; letter-spacing: -0.02em;">{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="f7nt-testimonials-grid">
+      {% for block in section.blocks %}
+        <div class="f7nt-testimonial-card" {{ block.shopify_attributes }}>
+          <div class="f7nt-testimonial-quote-icon">"</div>
+
+          <div class="f7nt-testimonial-content">
+            {% if block.settings.rating > 0 %}
+              <div class="f7nt-testimonial-stars">
+                {% for i in (1..5) %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="f7nt-testimonial-star {% if i <= block.settings.rating %}filled{% else %}empty{% endif %}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <p class="f7nt-testimonial-text">
+              {{ block.settings.testimonial }}
+            </p>
+
+            <div class="f7nt-testimonial-author">
+              <div class="f7nt-testimonial-avatar">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 96 }}" width="48" height="48" alt="{{ block.settings.name | escape }}" loading="lazy">
+                {% else %}
+                  <span class="f7nt-testimonial-fallback">{{ block.settings.name | slice: 0 | capitalize }}</span>
+                {% endif %}
+              </div>
+              <div class="f7nt-author-info">
+                <h3 class="f7nt-author-name">{{ block.settings.name }}</h3>
+                <p class="f7nt-author-role">
+                  {{ block.settings.role }}
+                  {% if block.settings.company != blank %} @ {{ block.settings.company }}{% endif %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "WHAT PEOPLE ARE SAYING"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "desktop_columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Cards per row (Desktop)",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Author Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Customer"
+        },
+        {
+          "type": "text",
+          "id": "company",
+          "label": "Company (Optional)"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial",
+          "label": "Testimonial",
+          "default": "This product completely transformed my setup. The attention to detail is fantastic. Highly recommended!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials Component",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Alicia M.",
+            "role": "VIP Member",
+            "testimonial": "Hubby was very happy with the mystery box! Love the designs on the shirts and the air fresheners smell amazing! They last longer than I expected! Can't go wrong with a good key tag."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michael R.",
+            "role": "Verified Buyer",
+            "testimonial": "This made my car shine like nothing I've ever seen before. It is so slick as well. Definitely will be using this on every vehicle I have from now on."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Anthony C.",
+            "role": "Verified Buyer",
+            "testimonial": "The cap is made really good. Great material and stitching and quality. I recommend this product to anyone who likes hats and stands out."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

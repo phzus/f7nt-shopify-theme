@@ -142,7 +142,7 @@
       "name": "New Releases",
       "settings": {
         "collection": "new-realeases",
-        "products_to_show": 6,
+        "products_to_show": 4,
         "title": "New Releases",
         "heading_size": "h1",
         "description": "",
@@ -172,30 +172,44 @@
         "image_1": {
           "type": "carousel_image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/freepik__um-bmw-m4-preto-igual-da-imagem-img2-fosco-com-kit__96258_1.jpg"
+            "local_image": "car-1.png"
           }
         },
         "image_2": {
           "type": "carousel_image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/ChatGPT_Image_5_de_mar._de_2026_15_14_48.png"
+            "local_image": "car-2.png"
           }
         },
         "image_3": {
           "type": "carousel_image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/freepik__um-bmw-m4-preto-igual-da-imagem-img1-fosco-com-kit__96262_1.jpg"
+            "local_image": "car-3.png"
+          }
+        },
+        "image_4": {
+          "type": "carousel_image",
+          "settings": {
+            "local_image": "car-4.png"
+          }
+        },
+        "image_5": {
+          "type": "carousel_image",
+          "settings": {
+            "local_image": "car-5.png"
           }
         }
       },
       "block_order": [
         "image_1",
         "image_2",
-        "image_3"
+        "image_3",
+        "image_4",
+        "image_5"
       ],
       "settings": {
-        "heading": "THIS MURDERED OUT 682HP ESCALADE-V COULD BE YOURS",
-        "subheading": "<p>This fully blacked-out Cadillac Escalade-V packs a supercharged 682HP V8, insane luxury, and the unmistakable presence of Cadillac's most powerful SUV ever built... and it could be YOURS. <strong>But hurry, you only have 8 DAYS to make it YOURS!<\/strong><\/p>",
+        "heading": "THIS MURDERED OUT BMW M4 COULD BE YOURS",
+        "subheading": "<p>This fully blacked-out BMW M4 packs an aggressively tuned engine, high-end M Competition components, and the unmistakable road presence of a true luxury sports machine... and it could be YOURS. <strong>But hurry, you only have 8 DAYS to make it YOURS!<\/strong><\/p>",
         "button_text": "ALL THE DETAILS",
         "button_link": "",
         "padding_top": 60,
@@ -207,8 +221,9 @@
       "name": "Caps",
       "settings": {
         "collection": "caps",
-        "products_to_show": 3,
-        "title": "Caps",
+        "products_to_show": 4,
+        "title": "Legends Wear Crowns",
+        "subtitle": "Headwear",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -226,7 +241,7 @@
         "show_rating": false,
         "quick_add": "standard",
         "columns_mobile": "2",
-        "swipe_on_mobile": true,
+        "swipe_on_mobile": false,
         "padding_top": 16,
         "padding_bottom": 0
       }
@@ -236,8 +251,9 @@
       "name": "T-Shirt",
       "settings": {
         "collection": "roupas",
-        "products_to_show": 3,
-        "title": "T-Shirts",
+        "products_to_show": 4,
+        "title": "Streetwear Essentials",
+        "subtitle": "Apparel",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -255,7 +271,7 @@
         "show_rating": false,
         "quick_add": "standard",
         "columns_mobile": "2",
-        "swipe_on_mobile": true,
+        "swipe_on_mobile": false,
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -268,6 +284,116 @@
       "type": "_blocks",
       "name": "Tshirt",
       "settings": {}
+    },
+    "testimonials_component": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "WHAT PEOPLE ARE SAYING",
+        "bg_color": "#ffffff",
+        "desktop_columns": 3,
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Nathan W.",
+            "role": "Verified Buyer",
+            "testimonial": "The hat is awesome!! The quality is definitely worth the purchase. Also just received my membership hat and license plate. Great delivery time."
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michael R.",
+            "role": "Verified Buyer",
+            "testimonial": "This made my car shine like nothing I've ever seen before. It is so slick as well. Definitely will be using this on every vehicle I have from now on."
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Anthony C.",
+            "role": "Verified Buyer",
+            "testimonial": "The cap is made really good. Great material and stitching and quality. I recommend this product to anyone who likes hats and stands out."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ]
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "subtitle": "FREQUENTLY ASKED QUESTIONS",
+        "title": "THE ANSWERS YOU'RE LOOKING FOR",
+        "bg_color": "#f6f6f6",
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "Is this legit? Like I could actually win??",
+            "answer": "<p>Yes! Since 2018 we have given away amazing prizes and we do NOT plan on stopping soon! Our Giveaways are 100% legal and backed by our administrator.</p><p>To see all of our Past Winners <a href=\"#\">click here!</a></p>",
+            "show_alert": false,
+            "show_info_box": false
+          }
+        },
+        "faq_2": {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "How is the winner selected & notified?",
+            "answer": "<p>At the end of each giveaway, all entries are sent to our Federally Compliant Sweepstakes Administrator. They usually take between 1 & 2 weeks to verify and tally all entries, then conduct a random drawing to select a winner.</p>",
+            "show_alert": true,
+            "alert_content": "<p><strong>BEWARE OF SCAMMERS!</strong><br>Our winners are NEVER notified over Social Media. We call you directly!</p>",
+            "show_info_box": false
+          }
+        },
+        "faq_3": {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "I placed an order, how do I know if I'm entered?",
+            "answer": "<p>Once you complete checkout our system will <strong>AUTOMATICALLY RECORD</strong> your entries! Place 1, 2, 3 or even 100 orders, all your entries will be AUTOMATICALLY COMBINED!</p>",
+            "show_alert": false,
+            "show_info_box": false
+          }
+        },
+        "faq_4": {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "How do I know if my order has shipped?",
+            "answer": "<p>Once your order has shipped you will get a Shipping Confirmation to the email you entered at checkout.</p>",
+            "show_alert": false,
+            "show_info_box": true,
+            "info_title": "PLEASE NOTE",
+            "info_content": "If you have not gotten any emails from us after placing your order, it is likely that you mistyped your email address during checkout."
+          }
+        },
+        "faq_5": {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "I have a different question, please help!",
+            "answer": "<p>We're happy to answer any question you may have! Check out our Help Center for more information on our giveaways, orders, and contact information.</p>",
+            "show_alert": false,
+            "show_info_box": false,
+            "button_text": "VISIT HELP CENTER",
+            "button_link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ]
     }
   },
   "order": [
@@ -281,6 +407,8 @@
     "featured_collection_RJr9Mw",
     "featured_collection_XTigL6",
     "17726463535e582f51",
-    "1772734060e0948be6"
+    "1772734060e0948be6",
+    "testimonials_component",
+    "faq_accordion"
   ]
 }

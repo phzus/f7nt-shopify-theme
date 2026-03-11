@@ -1,0 +1,419 @@
+{% style %}
+  .f7nt-faq-wrapper {
+    background-color: transparent;
+    padding: {{ section.settings.padding_top }}px 16px {{ section.settings.padding_bottom | plus: 20 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .f7nt-faq-wrapper {
+      padding-top: {{ section.settings.padding_top | times: 1.5 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 1.5 | round | plus: 32 }}px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  .f7nt-faq-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .f7nt-faq-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .f7nt-faq-subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .f7nt-faq-title {
+    font-size: 36px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    color: #000;
+    letter-spacing: -0.02em;
+  }
+
+  @media screen and (min-width: 750px) {
+    .f7nt-faq-title {
+      font-size: 48px;
+    }
+  }
+
+  .f7nt-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .f7nt-faq-item {
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    overflow: hidden;
+  }
+
+  .f7nt-faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 24px 32px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+  }
+
+  .f7nt-faq-question:hover {
+    background-color: #fafafa;
+  }
+
+  .f7nt-faq-icon {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .f7nt-faq-item.is-active .f7nt-faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .f7nt-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-in-out, padding 0.35s ease-in-out;
+    padding: 0 32px;
+    color: #4b5563;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  .f7nt-faq-item.is-active .f7nt-faq-answer {
+    padding-bottom: 24px;
+    max-height: 1000px; /* arbitrary large value for transition */
+  }
+
+  .f7nt-faq-answer p {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .f7nt-faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .f7nt-faq-answer a {
+    color: #0000ff;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .f7nt-faq-alert {
+    background-color: #ffe5e5;
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 16px;
+  }
+
+  .f7nt-faq-alert p {
+    margin: 0;
+    color: #d32f2f;
+  }
+
+  .f7nt-faq-button {
+    display: inline-block;
+    background-color: #ff0000;
+    color: #ffffff;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 4px;
+    margin-top: 16px;
+    transition: background-color 0.2s ease;
+  }
+
+  .f7nt-faq-button:hover {
+    background-color: #cc0000;
+  }
+
+  .f7nt-faq-info-box {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 16px;
+  }
+
+  .f7nt-faq-info-box h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #333;
+  }
+
+  .f7nt-faq-info-box p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+  }
+{% endstyle %}
+
+<div class="f7nt-faq-wrapper" {{ section.shopify_attributes }}>
+  <div class="f7nt-faq-container">
+    <div class="f7nt-faq-header">
+      {% if section.settings.subtitle != blank %}
+        <span class="f7nt-faq-subtitle">{{ section.settings.subtitle }}</span>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="f7nt-faq-title">{{ section.settings.title }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="f7nt-faq-list">
+      {% for block in section.blocks %}
+        <div class="f7nt-faq-item" {{ block.shopify_attributes }}>
+          <button class="f7nt-faq-question" aria-expanded="false">
+            <span>{{ block.settings.question }}</span>
+            <span class="f7nt-faq-icon">+</span>
+          </button>
+          <div class="f7nt-faq-answer">
+            <div class="f7nt-faq-answer-content">
+              {{ block.settings.answer }}
+
+              {% if block.settings.show_alert %}
+                <div class="f7nt-faq-alert">
+                  {{ block.settings.alert_content }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_info_box %}
+                <div class="f7nt-faq-info-box">
+                  <h4>{{ block.settings.info_title }}</h4>
+                  <p>{{ block.settings.info_content }}</p>
+                </div>
+              {% endif %}
+
+              {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+                <a href="{{ block.settings.button_link }}" class="f7nt-faq-button">
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.f7nt-faq-item');
+
+    faqItems.forEach(item => {
+      const questionBtn = item.querySelector('.f7nt-faq-question');
+
+      questionBtn.addEventListener('click', () => {
+        const isActive = item.classList.contains('is-active');
+
+        // Close all other items (optional, remove this block to allow multiple open)
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('is-active');
+            otherItem.querySelector('.f7nt-faq-question').setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Toggle current item
+        if (isActive) {
+          item.classList.remove('is-active');
+          questionBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('is-active');
+          questionBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom FAQ Accordion",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "THE ANSWERS YOU'RE LOOKING FOR"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f6f6f6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "custom_faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Add your question here"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Provide the answer to the above question here.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Alert Box (Optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_alert",
+          "label": "Show Alert Box (Red)",
+          "default": false
+        },
+        {
+          "type": "richtext",
+          "id": "alert_content",
+          "label": "Alert Content"
+        },
+        {
+          "type": "header",
+          "content": "Info Box (Optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_info_box",
+          "label": "Show Info Box (Gray)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "info_title",
+          "label": "Info Box Title"
+        },
+        {
+          "type": "textarea",
+          "id": "info_content",
+          "label": "Info Box Content"
+        },
+        {
+          "type": "header",
+          "content": "Action Button (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom FAQ Accordion",
+      "blocks": [
+        {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "Is this legit? Like I could actually win??",
+            "answer": "<p>Yes! Since 2018 we have given away amazing prizes and we do NOT plan on stopping soon! Our Giveaways are 100% legal and backed by our administrator.</p><p>To see all of our Past Winners <a href=\"#\">click here!</a></p>"
+          }
+        },
+        {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "How is the winner selected & notified?",
+            "answer": "<p>At the end of each giveaway, all entries are sent to our Federally Compliant Sweepstakes Administrator. They usually take between 1 & 2 weeks to verify and tally all entries, then conduct a random drawing to select a winner.</p>",
+            "show_alert": true,
+            "alert_content": "<p><strong>BEWARE OF SCAMMERS!</strong><br>Our winners are NEVER notified over Social Media. We call you directly!</p>"
+          }
+        },
+        {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "I placed an order, how do I know if I'm entered?",
+            "answer": "<p>Once you complete checkout our system will <strong>AUTOMATICALLY RECORD</strong> your entries! Place 1, 2, 3 or even 100 orders, all your entries will be AUTOMATICALLY COMBINED!</p>"
+          }
+        },
+        {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "How do I know if my order has shipped?",
+            "answer": "<p>Once your order has shipped you will get a Shipping Confirmation to the email you entered at checkout.</p>",
+            "show_info_box": true,
+            "info_title": "PLEASE NOTE",
+            "info_content": "If you have not gotten any emails from us after placing your order, it is likely that you mistyped your email address during checkout."
+          }
+        },
+        {
+          "type": "custom_faq_item",
+          "settings": {
+            "question": "I have a different question, please help!",
+            "answer": "<p>We're happy to answer any question you may have! Check out our Help Center for more information on our giveaways, orders, and contact information.</p>",
+            "button_text": "VISIT HELP CENTER",
+            "button_link": "/pages/contact"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
