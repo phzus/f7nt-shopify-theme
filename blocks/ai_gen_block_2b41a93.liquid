@@ -31,7 +31,7 @@
   .ai-countdown-timer__top-{{ ai_gen_id }} {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 40px;
     flex-wrap: wrap;
   }
@@ -43,6 +43,7 @@
     color: {{ block.settings.heading_color }};
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-align: center;
     text-shadow: 0 0 10px {{ block.settings.heading_glow_color }},
                  0 0 20px {{ block.settings.heading_glow_color }},
                  0 0 30px {{ block.settings.heading_glow_color }};
@@ -52,6 +53,7 @@
     display: flex;
     gap: {{ block.settings.timer_gap }}px;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .ai-countdown-timer__block-{{ ai_gen_id }} {
